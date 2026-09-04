@@ -1,0 +1,23 @@
+# Vivado artifacts and logs
+*.jou
+*.log
+*.pb
+*.str
+*.wdb
+.Xil/
+project_*/
+ip_user_files/
+
+# Python caches
+__pycache__/
+*.pyc
+
+# MIF files
+*.mif
+
+Datasets and Weights
+data/
+*.pth
+
+# Editor settings
+.vscode/
