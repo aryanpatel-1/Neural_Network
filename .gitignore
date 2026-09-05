@@ -1,12 +1,24 @@
 # Vivado artifacts and logs
 *.jou
 *.log
-*.pb
 *.str
-*.wdb
+*.dcp
+*.bit
+*.hwdef
+*.xsa
 .Xil/
-project_*/
-ip_user_files/
+*_runs/
+*_sim/
+*_project/
+
+# Vitis / MicroBlaze Workspace
+.metadata/
+RemoteSystemsTempFiles/
+*.elf
+*.o
+*.d
+Debug/
+Release/
 
 # Python caches
 __pycache__/
