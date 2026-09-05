@@ -150,15 +150,14 @@ def run_tracker():
 
                     # catch FPGA output
                     print("Waiting for FPGA response...")
-                    fpga_result_bytes = ser.read(1000) # read up to 1000 bytes
+                    fpga_result_bytes = ser.read(1) 
 
-                    if len(fpga_result_bytes) > 0:
-                        print("\n--- FPGA DEBUG OUTPUT ---")
-                        # Decode the bytes into text so you can read the xil_printf checkpoints
-                        print(fpga_result_bytes.decode('utf-8', errors='ignore'))
-                        print("-------------------------\n")
+                    if len(fpga_result_bytes) == 1:
+                        # extract the raw integer value (0-9) from the single byte
+                        prediction = fpga_result_bytes[0]
+                        print(f"\n>>> FPGA PREDICTION: {prediction} <<<\n")
                     else:
-                        print("ERROR: 5-second timeout reached! The FPGA never sent a reply.") 
+                        print("ERROR: Timeout reached! The FPGA never sent a reply.")
                 
             elif key == 27:
                 # ESC to quit

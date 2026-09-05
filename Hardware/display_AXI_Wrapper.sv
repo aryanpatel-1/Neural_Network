@@ -28,8 +28,8 @@ module display_AXI_Wrapper(
     input  logic [31:0] s_axis_tdata,
     input  logic s_axis_tvalid,
     
-    output logic [3:0] anode,   // Active-low digit select
-    output logic [7:0] cathode  // Active-low segment mapping (A-G, DP)
+    output logic [3:0] anode,   // active-low digit select
+    output logic [7:0] cathode  // active-low segment mapping (A-G, DP)
 
     );
     
@@ -40,7 +40,6 @@ module display_AXI_Wrapper(
             held_digit <= 4'hF;
         end 
         else if (s_axis_tvalid) begin
-            // The classification is always 0-9, which fits perfectly in 4 bits
             held_digit <= s_axis_tdata[3:0]; 
         end
     end
@@ -49,7 +48,7 @@ module display_AXI_Wrapper(
 
     always_comb begin
         case (held_digit)
-            // Cathode mapping: {DP, G, F, E, D, C, B, A}
+            // cathode mapping: {DP, G, F, E, D, C, B, A}
             // 0 means the LED segment is ON.
             4'h0: cathode = 8'b1100_0000; 
             4'h1: cathode = 8'b1111_1001; 
@@ -62,7 +61,7 @@ module display_AXI_Wrapper(
             4'h8: cathode = 8'b1000_0000; 
             4'h9: cathode = 8'b1001_0000;
             4'hF: cathode = 8'b1111_1111; 
-            default: cathode = 8'b1111_1111; // Turn off if out of bounds
+            default: cathode = 8'b1111_1111; // turn off if out of bounds
         endcase
     end
         
