@@ -2,7 +2,7 @@ import cv2
 import serial
 import numpy as np
 import torch
-from define_nn import MNISTHardwareNet # Import your exact architecture
+from Software.define_nn import MNISTHardwareNet # Import your exact architecture
 
 def dual_inference_tracker():
     # 1. Load the PyTorch Model

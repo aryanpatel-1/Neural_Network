@@ -1,6 +1,6 @@
-from train_nn import train_model
-from weights_and_biases import generate_files
-from wand_detection import run_tracker
+from Software.train_nn import train_model
+from Software.weights_and_biases import generate_files
+from Software.wand_detection import run_tracker
 
 def main():
     # phase 1: train the PyTorch model

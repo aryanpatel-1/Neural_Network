@@ -2,7 +2,7 @@ import serial
 import torch
 import time
 import numpy as np
-from define_nn import MNISTHardwareNet
+from Software.define_nn import MNISTHardwareNet
 
 # convert PyTorch float to 2-byte Q1.15 Big-Endian 
 def float_to_q115_bytes(val):
