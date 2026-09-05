@@ -1,0 +1,35 @@
+# Vivado artifacts and logs
+*.jou
+*.log
+*.str
+*.dcp
+*.bit
+*.hwdef
+*.xsa
+.Xil/
+*_runs/
+*_sim/
+*_project/
+
+# Vitis / MicroBlaze Workspace
+.metadata/
+RemoteSystemsTempFiles/
+*.elf
+*.o
+*.d
+Debug/
+Release/
+
+# Python caches
+__pycache__/
+*.pyc
+
+# MIF files
+*.mif
+
+Datasets and Weights
+data/
+*.pth
+
+# Editor settings
+.vscode/
