@@ -60,7 +60,6 @@ def dual_inference_tracker():
                 points = cv2.findNonZero(gray_canvas)
 
                 if points is not None:
-                    # --- IMAGE PREPARATION (The exact logic we fixed) ---
                     x, y, w, h = cv2.boundingRect(points)
                     cropped = gray_canvas[y:y+h, x:x+w]
                     
@@ -94,29 +93,23 @@ def dual_inference_tracker():
 
                     cv2.imshow("Vision Array", final_28x28_uint8)
 
-                    # ==========================================
-                    # TEST 1: PYTORCH INFERENCE
-                    # ==========================================
-                    # Scale to [0.0, 1.0] exactly like transforms.ToTensor()
+                    # pytorch inference
                     pytorch_input = torch.tensor(final_28x28_uint8, dtype=torch.float32).flatten() / 255.0
                     
                     with torch.no_grad():
                         pytorch_logits = model(pytorch_input)
                         pytorch_prediction = torch.argmax(pytorch_logits).item()
 
-                    # ==========================================
-                    # TEST 2: FPGA INFERENCE
-                    # ==========================================
+                    # FPGA inference
                     flat_bytes = final_28x28_uint8.flatten().tobytes()
                     ser.write(flat_bytes)
                     
                     fpga_result_bytes = ser.read(1)
                     fpga_prediction = int.from_bytes(fpga_result_bytes, 'big') if len(fpga_result_bytes) > 0 else -1
 
-                    print(f"\n--- INFERENCE RESULTS ---")
-                    print(f"PyTorch Neural Net Says: {pytorch_prediction}")
-                    print(f"Hardware FPGA Says     : {fpga_prediction}")
-                    print(f"-------------------------")
+                    print(f"\ninference results")
+                    print(f"pyTorch neural net: {pytorch_prediction}")
+                    print(f"hardware FPGA: {fpga_prediction}")
 
             elif key == 27:
                 break
